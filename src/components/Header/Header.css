@@ -1,0 +1,86 @@
+.header {
+        width: calc(100% - 140px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        position: relative;
+}
+
+    .header__list-link {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        list-style: none;
+        padding: 0;
+    }
+    
+    .header__link {
+        text-decoration: none;
+        color: #000000;
+        font-size: 14px;
+        line-height: 18px;
+        margin: 0;
+    }
+    
+    .header__item-link_type_signup {
+        margin-right: 30px;
+    }
+    
+    .header__item-link_type_signin {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(43, 224, 128, 1);
+        width: 76px;
+        height: 32px;
+        border-radius: 3px;
+    }
+
+    .header__button_burger {
+        display: none;
+    }
+
+@media screen and (max-width: 1023px) {
+        .header {
+                width: calc(100% - 60px);
+        }
+
+        .header__button_burger {
+            display: block;
+            background-image: url(../../images/burger__menu.svg);
+            background-position: center;
+            background-color: transparent;
+            border: none;
+            width: 40px;
+            height: 43px;
+            cursor: pointer;
+            padding: 0;
+        }
+      }
+
+      @media screen and (max-width: 678px) {
+            .header {
+                width: calc(100% - 40px);
+            }
+
+            .header__item-link_type_signup {
+                margin-right: 14px;
+            }
+        
+            .header__item-link_type_signin {
+               
+                width: 54px;
+                height: 26px;
+            }
+      
+            .header__link {
+                font-size: 10px;
+                line-height: 16px;
+            }
+
+            .header__button_burger:hover {
+                opacity: .8;                
+                transition: opasity 0.5s linear;
+            }
+      }

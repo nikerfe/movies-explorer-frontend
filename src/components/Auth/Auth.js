@@ -1,7 +1,7 @@
 import React from 'react';
 import './Auth.css';
-import { Route } from 'react-router-dom';
-
+import { Route, NavLink  } from 'react-router-dom';
+import Logo from '../Logo/Logo.js';
 
 function Auth(props) {
     const [email, setEmailValue] = React.useState('');
@@ -32,8 +32,11 @@ function Auth(props) {
         
         <section className={`auth auth_type_${props.name}`}>
             <div className="auth__container">
+            <Logo
+            name="auth"/>
             <h2 className="auth__title">{props.title}</h2>
             <Route path="/signup"> 
+           
                 <form onSubmit={handleSubmit} name={`${props.name}`} action="#" method="POST" className="auth__form" noValidate>
                 <label for="name-input" className="auth__label">Имя</label>
                 <input onChange={handleChangeName}  value={name} type="text" className="auth__input popup__input_type_name" name="name"
@@ -49,6 +52,8 @@ function Auth(props) {
                     <span className="auth__input-error auth__input-error_type_password" id="password-input-error"></span>
                     <button type="submit" className={`auth__submit-button auth__submit-button_type_${props.name}`}>{props.buttonTitle}</button>
                 </form>
+                <p className="auth__sign">Уже зарегестрированы?<NavLink to="/signin" 
+      className="auth__sign-link" activeClassName="auth__sign_active">Войти</NavLink></p>
                 </Route> 
 
                 <Route path="/signin"> 
@@ -63,6 +68,8 @@ function Auth(props) {
                     <span className="auth__input-error auth__input-error_type_password" id="password-input-error"></span>
                     <button type="submit" className={`auth__submit-button auth__submit-button_type_${props.name}`}>{props.buttonTitle}</button>
                 </form>
+                <p className="auth__sign">Еще не зарегестрированы?<NavLink to="/signup" 
+      className="auth__sign-link" activeClassName="auth__sign_active">Регистрация</NavLink></p>
                 </Route> 
             </div>
         </section>

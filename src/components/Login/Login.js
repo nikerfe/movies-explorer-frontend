@@ -1,4 +1,6 @@
 import Auth from '../Auth/Auth.js';
+import './Login.css';
+import { NavLink } from 'react-router-dom';
 
 function Login(props) {
   function handleSubmit(email, password) {
@@ -10,7 +12,8 @@ function Login(props) {
     buttonTitle="Войти"
     onSubmit={handleSubmit}
   >
-  </Auth>)
+  </Auth>
+  )
 }
 
 export default Login

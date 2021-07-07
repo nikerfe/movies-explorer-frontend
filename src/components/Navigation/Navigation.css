@@ -1,0 +1,170 @@
+.navigation {
+    justify-self: end;
+    margin: 18px 0;
+    position: absolute;
+    top:0;
+    right: 70px;
+}
+
+.navigation__list-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 0;
+}
+
+.navigation__link {
+    text-decoration: none;
+    color: #000000;
+    text-align: center;
+    font-weight: 500;
+}
+
+.navigation__link_active:hover {
+  text-decoration: black;
+  transition: text-decoration 0.5s linear;
+}
+
+.navigation__item-link_type_movies {
+    margin-right: 20px;
+}
+
+.navigation__item-link_type_saved-movies {
+    margin-right: 50px;
+}
+
+.navigation__item-link_type_signup {
+    margin-right: 30px;
+}
+
+.navigation__item-link_type_signin {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(43, 224, 128, 1);
+    width: 76px;
+    height: 32px;
+    border-radius: 3px;
+}
+
+.navigation__link_type_profile {
+    margin-right: 17px;
+    font-weight: 500;
+}
+
+.navigation__button {
+    display: none;
+}
+
+.navigation__link_type_main {
+    display: none;
+}
+
+.navigation__button_close
+{
+  display: none
+}
+
+@media screen and (max-width: 1023px) {
+
+  .navigation {
+    position: fixed;
+    top:0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .5);
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0s linear;
+    margin: 0;
+    transform-origin: 0% 0%;
+    z-index: 2;
+}
+
+  .navigation_open {
+    visibility: visible;
+    opacity: 1;
+}
+
+  .navigation__container {
+    justify-self: end;
+    
+    margin: 0 0 0 auto;
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ffffff;
+    transform: translate(120%, 0);
+    transition: transform 0.4s linear;
+    }
+
+  .navigation__container_open {
+    transform: translate(0,0)
+    }
+
+    .navigation__list-link {
+        flex-direction: column;
+        margin: 159px 0 0 0;
+    }
+
+    .navigation__item-link {
+        margin-bottom: 28px;   
+    }
+
+    .navigation__link_type_main {
+        display: block;
+    }
+ 
+    .navigation__item-link_type_profile {
+        margin-top: 628px;
+    }
+    
+    .navigation__button_close
+    {
+      display: block;
+      background-image: url(../../images/close__menu.svg);
+      background-position: center;
+      background-color: transparent;
+      border: none;
+      width: 40px;
+      height: 43px;
+      cursor: pointer;
+      opacity: 1; 
+      position: absolute;
+      top:16px;
+      right: 16px;
+    }
+
+    .navigation__button_close:hover {
+      opacity: .8;
+      transition: opasity 0.5s linear;
+    }
+  
+  
+    .navigation__item-link_type_movies {
+      margin-right: 0;
+  }
+  
+  .navigation__item-link_type_saved-movies {
+      margin-right: 0;
+  }
+  
+  .navigation__item-link_type_signup {
+      margin-right: 30px;
+  }
+  }
+
+  @media screen and (max-width: 678px) {
+    .navigation__container {
+      width: 100%;
+    }
+  }
+
+  

@@ -12,7 +12,7 @@ function Register(props) {
     buttonTitle="Зарегистрироваться"
     onSubmit={handleSubmit}
   >
-      <p className="auth__sign-in auth__sign-in_type_main">Уже зарегистрированы?<NavLink to="/signin" className="auth__sign-in auth__sign-in_type_main" activeClassName="auth__sign-in_active"> Войти</NavLink></p>
+     
   </Auth>)
 }
 
