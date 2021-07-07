@@ -23,11 +23,11 @@
     }
 }
 
-.auth__sign-in_type_main {
-    font-size: 14px;
-    line-height: 17px;
+    .auth__sign-in_type_main {
+        font-size: 14px;
+        line-height: 17px;
 }
 
-.auth__sign-in_title {
-color:rgba(255, 104, 56, 1)
+    .auth__sign-in_title {
+        color:rgba(255, 104, 56, 1)
 }

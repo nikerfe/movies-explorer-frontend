@@ -8,9 +8,7 @@ function Portfolio(props) {
 
         <section className="portfolio">
             <div className="portfolio__container">
-
                 <h2 className="portfolio__title">Портфолио</h2>
-
                 <ul className="portfolio__links">
                     <li className="portfolio__links-item">
                         <a className="portfolio__link" href="https://github.com/nikerfe">Одностраничный сайт</a>

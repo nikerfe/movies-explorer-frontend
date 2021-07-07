@@ -110,24 +110,23 @@
     }
 
     .navigation__list-link {
-        flex-direction: column;
-        margin: 159px 0 0 0;
+      flex-direction: column;
+      margin: 159px 0 0 0;
     }
 
     .navigation__item-link {
-        margin-bottom: 28px;   
+       margin-bottom: 28px;   
     }
 
     .navigation__link_type_main {
-        display: block;
+      display: block;
     }
  
     .navigation__item-link_type_profile {
-        margin-top: 628px;
+      margin-top: 628px;
     }
     
-    .navigation__button_close
-    {
+    .navigation__button_close {
       display: block;
       background-image: url(../../images/close__menu.svg);
       background-position: center;
@@ -159,7 +158,7 @@
   .navigation__item-link_type_signup {
       margin-right: 30px;
   }
-  }
+}
 
   @media screen and (max-width: 678px) {
     .navigation__container {

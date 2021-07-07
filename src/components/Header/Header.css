@@ -43,7 +43,7 @@
 
 @media screen and (max-width: 1023px) {
         .header {
-                width: calc(100% - 60px);
+            width: calc(100% - 60px);
         }
 
         .header__button_burger {
@@ -60,27 +60,26 @@
       }
 
       @media screen and (max-width: 678px) {
-            .header {
-                width: calc(100% - 40px);
+        .header {
+            width: calc(100% - 40px);
             }
 
-            .header__item-link_type_signup {
-                margin-right: 14px;
+        .header__item-link_type_signup {
+            margin-right: 14px;
             }
         
-            .header__item-link_type_signin {
-               
-                width: 54px;
-                height: 26px;
+        .header__item-link_type_signin {
+            width: 54px;
+            height: 26px;
             }
       
-            .header__link {
-                font-size: 10px;
-                line-height: 16px;
+        .header__link {
+            font-size: 10px;
+            line-height: 16px;
             }
 
-            .header__button_burger:hover {
-                opacity: .8;                
-                transition: opasity 0.5s linear;
+        .header__button_burger:hover {
+            opacity: .8;                
+            transition: opasity 0.5s linear;
             }
       }

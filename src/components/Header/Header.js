@@ -10,15 +10,15 @@ import Logo from '../Logo/Logo.js';
 function Header(props) {
     const [isNavigationOpen, setNavigationOpen] = React.useState(false);
     function handleNavigationOpenClick() { setNavigationOpen(true) };
-   
+
     return (
         <header className="header">
             <Route path={["/signup", "/signin"]}>
-                <Logo 
-                name="auth"
+                <Logo
+                    name="auth"
                 />
             </Route>
-            <Route path="/landing">
+            <Route path="/main">
                 <Logo />
                 <ul className="header__list-link">
                     <li className="header__item-link header__item-link_type_signup"><NavLink to="/signup"
@@ -28,7 +28,7 @@ function Header(props) {
                 </ul>
 
             </Route>
-            <Route path={["/main", "/profile"]}>
+            <Route path={["/movies", "/savedmovies", "/profile"]}>
                 <Logo />
                 <button className="header__button_burger" onClick={props.onNavigationOpen}></button>
             </Route>

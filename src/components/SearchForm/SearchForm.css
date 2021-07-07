@@ -81,15 +81,14 @@
 }
 
 .search__checkbox-visible {
-  display: inline-block;
-  width: 36px;
-  height: 20px;
-  position: relative;
-  background-color: #202020;
-  border-radius: 20px;
-  margin-right: 15px;
+    display: inline-block;
+    width: 36px;
+    height: 20px;
+    position: relative;
+    background-color: #202020;
+    border-radius: 20px;
+    margin-right: 15px;
 }
-
 
 .search__checkbox-visible::before {
     content: "";
@@ -129,9 +128,8 @@
 
 @media screen and (max-width: 1023px) {
         .search {
-            width: calc(100% - 60px);
+        width: calc(100% - 60px);
         }
-  
   }
 
   @media screen and (max-width: 678px) {
@@ -147,17 +145,13 @@
         font-size: 18px;
         line-height: 22px;
         text-align: left;
-    
     }
 
     .search__form {
-      
-        margin-top: 92px;
-        
+        margin-top: 92px; 
     }
 
     .search_short-movies {
-       
         margin-top: 43px;
     }
 }
