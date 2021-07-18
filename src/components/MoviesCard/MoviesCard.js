@@ -1,7 +1,13 @@
 import React from 'react';
 import './MoviesCard.css';
-import front from '../../images/front.jpg'
+import front from '../../images/front.jpg';
+
+
+
 function MoviesCard(props) {
+
+
+ 
 
 
   return (

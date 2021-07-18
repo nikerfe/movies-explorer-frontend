@@ -23,9 +23,18 @@ function Auth(props) {
         console.log(name);
     };
    
-    function handleSubmit(e) {
+    function handleSubmitRegister(e) {
         e.preventDefault();
         props.onSubmit(name, email, password);
+        console.log(email);
+        console.log(password);
+      }
+
+      function handleSubmitLogin(e) {
+        e.preventDefault();
+        props.onSubmit(email, password);
+        console.log(email);
+        console.log(password);
       }
     
     return (
@@ -37,7 +46,7 @@ function Auth(props) {
             <h2 className="auth__title">{props.title}</h2>
             <Route path="/signup"> 
            
-                <form onSubmit={handleSubmit} name={`${props.name}`} action="#" method="POST" className="auth__form" noValidate>
+                <form onSubmit={handleSubmitRegister} name={`${props.name}`} action="#" method="POST" className="auth__form" noValidate>
                 <label for="name-input" className="auth__label">Имя</label>
                 <input onChange={handleChangeName}  value={name} type="text" className="auth__input popup__input_type_name" name="name"
                         id="name-input" minLength="2" maxLength="40" placeholder="Имя" required />
@@ -57,7 +66,7 @@ function Auth(props) {
                 </Route> 
 
                 <Route path="/signin"> 
-                <form onSubmit={handleSubmit} name={`${props.name}`} action="#" method="POST" className="auth__form" noValidate>
+                <form onSubmit={handleSubmitLogin} name={`${props.name}`} action="#" method="POST" className="auth__form" noValidate>
                     <label for="email-input" className="auth__label">E-mail</label>
                     <input onChange={handleChangeEmail}  value={email} type="email" className="auth__input popup__input_type_email" name="email"
                         id="email-input" minLength="2" maxLength="40" placeholder="Email" required />

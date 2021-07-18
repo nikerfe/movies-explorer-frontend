@@ -1,6 +1,5 @@
 import Auth from '../Auth/Auth.js';
 import './Register.css';
-import { NavLink } from 'react-router-dom';
 
 function Register(props) {
   function handleSubmit(name, password, email) {

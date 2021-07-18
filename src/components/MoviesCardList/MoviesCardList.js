@@ -5,19 +5,13 @@ import save from '../../images/save.svg'
 function MoviesCarddivst(props) {
   return (
     <section className="movies">
-      <div className="movies__list">
+      <ul className="movies__list">
 
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
-        <MoviesCard />
+        <li className="movies__item">
+          <MoviesCard />
+          </li>
 
-      </div>
+      </ul>
       <button className="movies__button">Ещё</button>
     </section>
   )
