@@ -3,10 +3,19 @@ import SearchForm from '../SearchForm/SearchForm.js';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies(props) {
+
+
+
     return (
         <>
-            <SearchForm />
-            <MoviesCardList />
+            <SearchForm 
+            onShowMovies={props.onShowMovies}
+            isMovieSaved={props.isMovieSaved}
+            />
+            <MoviesCardList 
+            movies={props.movies}
+            onSavedMovie={props.onSavedMovie}
+            />
         </>
     );
 }

@@ -4,10 +4,18 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function SavedMovies(props) {
     return (
-            <>
-                <SearchForm />
-                <MoviesCardList />
-            </>
+        <>
+            <SearchForm 
+            onShowMovies={props.onShowMovies}
+            isMovieSaved={props.isMovieSaved}
+            onMovieSave={props.onMovieSave}
+            />
+            <MoviesCardList 
+            movies={props.movies}
+            isSaved={props.isSaved}
+            onDeleteMovie={props.onDeleteMovie}
+            />
+        </>
     );
 }
 

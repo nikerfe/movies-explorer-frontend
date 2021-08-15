@@ -1,20 +1,36 @@
 import "./MoviesCardList.css";
 import MoviesCard from '../MoviesCard/MoviesCard';
-import save from '../../images/save.svg'
+import Preloader from '../Preloader/Preloader.js';
+import { useLocation } from 'react-router-dom';
 
-function MoviesCarddivst(props) {
-  return (
-    <section className="movies">
-      <ul className="movies__list">
+function MoviesCardList(props) {
+ 
 
-        <li className="movies__item">
-          <MoviesCard />
-          </li>
+    return (
+      <section className="movies">
 
-      </ul>
-      <button className="movies__button">Ещё</button>
-    </section>
-  )
-}
+        <Preloader />
+        <ul className="movies__list">
 
-export default MoviesCarddivst;
+          {props.movies.map(item =>
+          (<MoviesCard
+            movie={item}
+            key={props.isSaved ? item.id : item.movieId}
+            onMovieSave={props.onMovieSave}
+            isMovieSaved={props.isMovieSaved}
+            savedCards={props.savedCards}
+            isSaved={props.isSaved}
+            onSavedMovie={props.onSavedMovie}
+            onDeleteMovie={props.onDeleteMovie}
+          />))
+          }
+
+        </ul>
+        <button className="movies__button">Ещё</button>
+      </section>
+    )
+ 
+  }
+
+
+export default MoviesCardList;

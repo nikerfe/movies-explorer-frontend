@@ -22,8 +22,13 @@ function App() {
   function handleNavigationOpenClick() { setNavigationOpen(true) };
   function handleNavigationCloseClick() { setNavigationOpen(false) };
   const [isLoggedIn, setLoggedIn] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [isSucceed, setIsSucceed] = React.useState(false);
-
+  const [allMovies, setAllMovies] = React.useState([]);
+  const [movies, setMovies] = React.useState([]);
+  const [savedMovie, setSavedMovie] = React.useState([]);
+  const [token, setToken] = React.useState(false);
+  
 
   function handleRegister(name, email, password) {
     api.register(name, email, password).then((res) => {
@@ -48,6 +53,7 @@ function App() {
     api.login(email, password).then((res) => {
       if (res) {
         localStorage.setItem('jwt', res.token);
+        setToken(localStorage.getItem('jwt'));
         setLoggedIn(true);
         history.push('/movies');
       } else {
@@ -78,48 +84,80 @@ function App() {
     tokenCheck();
   }, [])
 
-  
-  /*const getMovies = () => {
-    moviesApi.getMovies
-      .then((res) => {
-        return res.map((movie) => {
-          return {
-            id: movie.id,
-            country: movie.country,
-            director: movie.director,
-            duration: movie.duration,
-            year: movie.year,
-            description: movie.description,
-            image: `${movie.image === null 
-              ? ""
-              : `https://api.nomoreparties.co${movie.image?.url}`}`,
-            trailer: movie.trailerLink,
-            thumbnail: !movie.image
-              ? ""
-              : `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
-            movieId: movie.id || "",
-            nameRU: movie.nameRU,
-            nameEN: movie.nameEN,
-          };
-        });
-      })
-      .then((res) => {
-        if (res) {
-          localStorage.setItem("baseMovies", JSON.stringify(res));
-        }
-      })
-      .catch((err) => console.log(err))
-  };
+
+  function SearchMovies(movies, searchText) {
+    return movies.filter(movie => movie.nameRU.toLowerCase().includes(searchText.toLowerCase()))
+  }
+
+  const handleShowMovies = (searchText) => {
+    setIsLoading(true);
+    if (allMovies.length === 0) {
+      moviesApi.getMovies()
+        .then((movies) => {
+          localStorage.setItem('Movies', JSON.stringify(movies));
+          const allMovies = JSON.parse(localStorage.getItem('Movies'));
+          setAllMovies(allMovies);
+          const searchMoviesResult = SearchMovies(allMovies, searchText)
+          localStorage.setItem('SearchedMovies', JSON.stringify(searchMoviesResult));
+          const searchedMovies = JSON.parse(localStorage.getItem('SearchedMovies'));
+          setMovies(searchedMovies);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        })
+    }
+    else {
+      const searchMoviesResult = SearchMovies(allMovies, searchText)
+      localStorage.setItem('SearchedMovies', JSON.stringify(searchMoviesResult));
+      const searchedMovies = JSON.parse(localStorage.getItem('SearchedMovies'));
+      setMovies(searchedMovies);
+      setIsLoading(false);
+    }
+  }
+
 
   React.useEffect(() => {
-    if (isLoggedIn) {
-      getMovies();
-      const lastSeachedMovies = JSON.parse(
-        localStorage.getItem("searchResult")
-      );
+    if (localStorage.getItem('Movies')) {
+      setAllMovies(JSON.parse(localStorage.getItem('Movies')));
     }
-  }, [isLoggedIn]);*/
+  }, []);
 
+
+  function handleSavedMovie(movie) {
+    api.savedMovie(movie)
+    .then((data) => {
+      console.log(data)
+      const savedMovies = [...savedMovie, data];
+      localStorage.setItem('SavedMovies', JSON.stringify(savedMovies));
+      setSavedMovie(savedMovies);
+      console.log(savedMovie);
+    })
+    .catch(err => console.log(`Error: ${err}`))
+  }
+
+  function handleDeleteMovie(movieId) {
+    api.deleteSavedMovie(movieId)
+      .then((res) => {
+        const updateSavedMovies = savedMovie.filter((item) => {
+          return item._id !== movieId
+        });
+        setSavedMovie(updateSavedMovies);
+        localStorage.setItem('SavedMovies', JSON.stringify(updateSavedMovies));
+      })
+      .catch(err => console.log(`Error: ${err}`));
+    }
+
+  React.useEffect(() => {
+    if(isLoggedIn) {
+    api.getSavedMovies()
+      .then((res) => {
+        setSavedMovie(res);
+        console.log(savedMovie)
+      })
+      .catch(err => console.log(err));
+      
+    }
+  }, [isLoggedIn])
 
   return (
     <div className="App">
@@ -132,13 +170,13 @@ function App() {
             <Switch>
               <Route path="/signin">
                 <Login
-                onLogin={handleLogin}
+                  onLogin={handleLogin}
                 />
               </Route>
 
               <Route path="/signup">
                 <Register
-                 onRegister={handleRegister}
+                  onRegister={handleRegister}
                 />
               </Route>
 
@@ -148,7 +186,14 @@ function App() {
                 <Navigation
                   isOpen={isNavigationOpen}
                   onNavigationClose={handleNavigationCloseClick} />
-                <Movies />
+                <Movies
+                  onShowMovies={handleShowMovies}
+                  onSavedMovie={handleSavedMovie}
+ 
+
+
+                  movies={movies}
+                />
               </Route>
 
               <Route path="/savedmovies">
@@ -157,7 +202,11 @@ function App() {
                 <Navigation
                   isOpen={isNavigationOpen}
                   onNavigationClose={handleNavigationCloseClick} />
-                <SavedMovies />
+                <SavedMovies 
+                movies={savedMovie}
+                onDeleteMovie={handleDeleteMovie}
+                isSaved={true}
+                />
               </Route>
 
               <Route path="/profile">
@@ -170,7 +219,9 @@ function App() {
               </Route>
 
               <Route path="/main">
-                <Main />
+                <Main
+
+                />
               </Route>
 
               <Route path="/error">
