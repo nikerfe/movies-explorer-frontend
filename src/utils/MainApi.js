@@ -33,13 +33,13 @@ class MainApi {
     };
 
 
-    getToken(token) {
+    getToken() {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
             }
         })
             .then(checkResponse)
@@ -48,7 +48,8 @@ class MainApi {
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
             headers: {
-                authorization: this._token,
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
             }
         })
             .then(checkResponse)
@@ -59,54 +60,19 @@ class MainApi {
         return fetch(`${this._baseUrl}/users/me`, {
             method: 'PATCH',
             headers: {
-                authorization: this._token,
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`
             },
             body: JSON.stringify({
                 name: data.name,
-                about: data.about
-            })
-        })
-            .then(checkResponse)
-    }
-
-    getInitialCards() {
-        return fetch(`${this._baseUrl}/cards`, {
-            headers: {
-                authorization: this._token,
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(checkResponse)
-    }
-    addNewCard(data) {
-
-        return fetch(`${this._baseUrl}/cards`, {
-            method: 'POST',
-            headers: {
-                authorization: this._token,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: data.name,
-                link: data.link
+                email: data.email
             })
         })
             .then(checkResponse)
     }
 
 
-    deleteCard(cardId) {
-
-        return fetch(`${this._baseUrl}/movies/${cardId}`, {
-            method: 'DELETE',
-            headers: {
-                authorization: this._token,
-                'Content-Type': 'application/json'
-            },
-        })
-            .then(checkResponse)
-    }
+    
     savedMovie(movie) {
 
         return fetch(`${this._baseUrl}/movies`, {
@@ -143,17 +109,17 @@ class MainApi {
             .then(checkResponse)
     }
 
-    getSavedMovies(token) {
+    getSavedMovies() {
         return fetch(`${this._baseUrl}/movies`, {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
-          }
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+            }
         })
-        .then(checkResponse)
-      };
+            .then(checkResponse)
+    };
 };
 
 const api = new MainApi({

@@ -11,10 +11,18 @@ function Movies(props) {
             <SearchForm 
             onShowMovies={props.onShowMovies}
             isMovieSaved={props.isMovieSaved}
+            isShortMovies={props.isShortMovies}
+            handleShortMovies={props.handleShortMovies}
             />
             <MoviesCardList 
             movies={props.movies}
+            savedMovies={props.savedMovies}
             onSavedMovie={props.onSavedMovie}
+            onDeleteMovie={props.onDeleteMovie}
+            onAddMovies={props.onAddMovies}
+            error={props.error}
+            notFound={props.notFound}
+            isLoading={props.isLoading}
             />
         </>
     );

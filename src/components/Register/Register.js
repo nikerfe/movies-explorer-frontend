@@ -10,6 +10,7 @@ function Register(props) {
     name="signup"
     buttonTitle="Зарегистрироваться"
     onSubmit={handleSubmit}
+    errorMessage={props.errorMessage}
   >
 
   </Auth>)

@@ -23,7 +23,8 @@
     font-weight: 500;
 }
 
-.navigation__link_active:hover {
+.navigation__link_active {
+  border-bottom: 1px solid black;
   text-decoration: black;
   transition: text-decoration 0.5s linear;
 }
@@ -163,6 +164,10 @@
   @media screen and (max-width: 678px) {
     .navigation__container {
       width: 100%;
+    }
+
+    .navigation__item-link_type_profile {
+      margin-top: 328px;
     }
   }
 

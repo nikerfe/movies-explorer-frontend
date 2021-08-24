@@ -1,10 +1,8 @@
 import React from 'react';
 import './AboutMe.css';
-import { Route, NavLink } from 'react-router-dom';
 import avatar from '../../images/avatar.jpg'
 import NavTab from '../NavTab/NavTab';
 function AboutMe(props) {
-
 
     return (
 
@@ -25,14 +23,8 @@ function AboutMe(props) {
                         </li>
                     </ul>
                 </div>
-                <img className="about-me__image" src={avatar}/>
+                <img className="about-me__image" alt="аватар" src={avatar}/>
             </div>
-
-
-
-
-
-
         </section>
     )
 }

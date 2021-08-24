@@ -9,11 +9,16 @@ function SavedMovies(props) {
             onShowMovies={props.onShowMovies}
             isMovieSaved={props.isMovieSaved}
             onMovieSave={props.onMovieSave}
+            isShortMovies={props.isShortMovies}
+            handleShortMovies={props.handleShortMovies}
             />
             <MoviesCardList 
             movies={props.movies}
             isSaved={props.isSaved}
             onDeleteMovie={props.onDeleteMovie}
+            error={props.error}
+            notFound={props.notFound}
+            isLoading={props.isLoading}
             />
         </>
     );

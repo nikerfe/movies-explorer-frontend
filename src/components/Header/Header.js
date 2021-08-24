@@ -1,6 +1,5 @@
-import { NavLink, Route, useHistory } from 'react-router-dom';
+import { NavLink, Route, } from 'react-router-dom';
 import React from 'react';
-import account from '../../images/header__account.svg';
 import './Header.css';
 import Logo from '../Logo/Logo.js';
 
@@ -8,9 +7,7 @@ import Logo from '../Logo/Logo.js';
 
 
 function Header(props) {
-    const [isNavigationOpen, setNavigationOpen] = React.useState(false);
-    function handleNavigationOpenClick() { setNavigationOpen(true) };
-
+   
     return (
         <header className="header">
             <Route path={["/signup", "/signin"]}>

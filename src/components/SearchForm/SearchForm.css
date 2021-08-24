@@ -141,9 +141,15 @@
         display: none;
     }
 
+    .search__input {
+        width: calc(100% - 20px);
+        border: none;
+        outline: none;
+    }
+
     .search__input::placeholder {
-        font-size: 18px;
-        line-height: 22px;
+        font-size: 14px;
+        line-height: 18px;
         text-align: left;
     }
 

@@ -10,6 +10,7 @@ function Login(props) {
     name="signin"
     buttonTitle="Войти"
     onSubmit={handleSubmit}
+    errorMessage={props.errorMessage}
   >
   </Auth>
   )
