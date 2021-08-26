@@ -66,7 +66,7 @@ function Profile(props) {
                     <button type="submit" className={`${isValid ? 'profile__button' : 'profile__button profile__button_disabled'}`} disabled={!isValid}>Редактировать</button>
                 </form>
 
-                <NavLink className="profile__logout" activeClassName="profile__lougout_active" to="/signin" onClick={props.onLogout}>Выйти из аккаунта</NavLink>
+                <NavLink className="profile__logout" activeClassName="profile__lougout_active" to="/" onClick={props.onLogout}>Выйти из аккаунта</NavLink>
             </div>
         </section>
     )

@@ -22,7 +22,7 @@ import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
 function App() {
   const history = useHistory();
   const location = useLocation().pathname;
-  const savedMoviesRoute = (location === "/savedmovies") ? true : false;
+  const savedMoviesRoute = (location === "/saved-movies") ? true : false;
   const [currentUser, setCurrentUser] = React.useState({});
   const [isNavigationOpen, setNavigationOpen] = React.useState(false);
   const [isLoggedIn, setLoggedIn] = React.useState(false);
@@ -122,6 +122,7 @@ function App() {
   function handleLogout() {
     setLoggedIn(false);
     localStorage.removeItem('jwt');
+    history.push('/');
   }
 
   function SearchMovies(movies, searchText) {
@@ -222,6 +223,8 @@ function App() {
       .then((data) => {
         console.log(data)
         setCurrentUser(data);
+        setIsSucceed(true)
+        setInfoTooltipOpen(true);
       })
       .catch((err) => {
         console.log(err);
@@ -241,7 +244,6 @@ function App() {
   React.useEffect(() => {
     setNotFound(false)
     setError(false)
-    console.log(isInfoTooltipOpen)
   }, [location])
 
   React.useEffect(() => {
@@ -263,6 +265,11 @@ function App() {
           <div className="page">
             <div className="page__container">
               <Switch>
+              <Route exact path="/">
+                  <Main
+                  />
+                </Route>
+
                 <Route path="/signin">
                   <Login
                     onLogin={handleLogin}
@@ -295,7 +302,7 @@ function App() {
                   />
                 </ProtectedRoute>
 
-                <ProtectedRoute path="/savedmovies" isLoggedIn={isLoggedIn}>
+                <ProtectedRoute path="/saved-movies" isLoggedIn={isLoggedIn}>
                   <Header
                     onNavigationOpen={handleNavigationOpenClick} />
                   <Navigation
@@ -326,13 +333,7 @@ function App() {
                   />
                 </ProtectedRoute>
 
-                <Route exact path="/main">
-                  <Main
-
-                  />
-                </Route>
-
-                <Route path="/*">
+                <Route path="*">
                   <NotFound />
                 </Route>
               </Switch>

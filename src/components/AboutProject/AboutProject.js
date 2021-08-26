@@ -28,7 +28,7 @@ function AboutProject(props) {
                     </div>
                     <div className="about-project__loading-frontend">
                         <div className="about-project__loading-container about-project__loading-container_type_frontend">
-                            <p className="about-project__loading-duration">5 недель</p>
+                            <p className="about-project__loading-duration">4 недели</p>
                         </div>
                         <p className="about-project__loading-title">Front-end</p>
                     </div>

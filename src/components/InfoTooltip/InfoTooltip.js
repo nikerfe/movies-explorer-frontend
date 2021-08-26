@@ -5,8 +5,9 @@ import failLogo from '../../images/failLogo.svg';
 
 
 function InfoTooltip(props) {
+    
     const logo = props.isSucceed ? successLogo : failLogo
-    const title = props.isSucceed ? "Вы успешно зарегистрировались!" : `${props.errorMessage}`
+    const title = props.isSucceed ? "Ввведенные данные корректны!" : `${props.errorMessage}`
     return (
         
         <section className={`popup popup_type_info ${props.isOpen ? 'popup_opened' : 'hidden'}`}>

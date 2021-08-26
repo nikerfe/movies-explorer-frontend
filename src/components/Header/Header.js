@@ -15,7 +15,7 @@ function Header(props) {
                     name="auth"
                 />
             </Route>
-            <Route path="/main">
+            <Route exact path="/">
                 <Logo />
                 <ul className="header__list-link">
                     <li className="header__item-link header__item-link_type_signup"><NavLink to="/signup"
@@ -25,7 +25,7 @@ function Header(props) {
                 </ul>
 
             </Route>
-            <Route path={["/movies", "/savedmovies", "/profile"]}>
+            <Route path={["/movies", "/saved-movies", "/profile"]}>
                 <Logo />
                 <button className="header__button_burger" onClick={props.onNavigationOpen}></button>
             </Route>

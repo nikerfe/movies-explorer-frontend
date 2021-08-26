@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 
 function MoviesCard(props) {
   const location = useLocation().pathname;
-  const savedMoviesRoute = (location === "/savedmovies") ? true : false;
+  const savedMoviesRoute = (location === "/saved-movies") ? true : false;
   const [isSaved, setIsSaved] = React.useState(false);
 
   const movie = {
