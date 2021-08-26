@@ -139,6 +139,7 @@ function App() {
       return movies
     }
   }
+  
 
   const handleShowMovies = (searchText) => {
     setNotFound(false);
@@ -173,7 +174,8 @@ function App() {
           setIsLoading(false);
         } else {
           setNotFound(true);
-          setMovies([])
+          setMovies([]);
+          setIsLoading(false);
         }
       }
     } else {
@@ -187,7 +189,8 @@ function App() {
         setIsLoading(false);
       } else {
         setNotFound(true);
-        setSavedMovie([])
+        setSavedMovie([]);  
+        setIsLoading(false);
       }
     }
   }
