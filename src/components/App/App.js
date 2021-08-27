@@ -51,6 +51,19 @@ function App() {
 
   function handleShortMovies(e) {
     setCheckboxShortMovies(e.target.checked);
+    console.log(checkboxShortMovies)
+    let savedMovies = JSON.parse(localStorage.getItem("SavedMovies"));
+      if (savedMovies.length !== 0) {
+        const filteredSavedMovies = filterShortMovie(savedMovies)
+        localStorage.setItem('SearchedSavedMovies', JSON.stringify(filteredSavedMovies));
+        const searchedSavedMovies = JSON.parse(localStorage.getItem('SearchedSavedMovies'));
+        setSavedMovie(searchedSavedMovies);
+        setIsLoading(false);
+      } else {
+        setNotFound(true);
+        setSavedMovie([]);  
+        setIsLoading(false);
+      }
   }
 
   function handleRegister(name, email, password) {
@@ -82,8 +95,7 @@ function App() {
     api.login(email, password).then((res) => {
       if (res) {
         localStorage.setItem('jwt', res.token);
-        setLoggedIn(true);
-        history.push('/movies');
+        tokenCheck()
       } else {
         console.log("Ошибка при авторизации")
       }
