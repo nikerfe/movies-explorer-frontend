@@ -11,6 +11,7 @@ function SavedMovies(props) {
             onMovieSave={props.onMovieSave}
             isShortMovies={props.isShortMovies}
             handleShortMovies={props.handleShortMovies}
+            isLoading={props.isLoading}
             />
             <MoviesCardList 
             movies={props.movies}

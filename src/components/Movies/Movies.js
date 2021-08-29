@@ -13,6 +13,7 @@ function Movies(props) {
             isMovieSaved={props.isMovieSaved}
             isShortMovies={props.isShortMovies}
             handleShortMovies={props.handleShortMovies}
+            isLoading={props.isLoading}
             />
             <MoviesCardList 
             movies={props.movies}
@@ -23,6 +24,7 @@ function Movies(props) {
             error={props.error}
             notFound={props.notFound}
             isLoading={props.isLoading}
+            isShortMovies={props.checkboxShortMovies}
             />
         </>
     );

@@ -7,7 +7,7 @@ import './Navigation.css';
 function Navigation(props) {
 
     return (
-        <nav className={`navigation ${props.isOpen ? 'navigation_open' : ""}`}>
+        <nav className={`${props.isLoggedIn ? "navigation" : "hidden"} ${props.isOpen ? 'navigation_open' : ""}`}>
             <div className={`navigation__container ${props.isOpen ? 'navigation__container_open' : false}`} >
                 <button className="navigation__button_close" onClick={props.onNavigationClose}></button>
                 <ul className="navigation__list-link">

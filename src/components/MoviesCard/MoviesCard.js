@@ -36,14 +36,11 @@ function MoviesCard(props) {
     }
   }
 
-
   function checkSavedMovie() {
-    if (localStorage.getItem('SavedMovies')) {
-      let savedMovies = JSON.parse(localStorage.getItem("SavedMovies"));
+      let savedMovies = savedMoviesLocal()
       if (savedMovies.map(item => item.movieId).includes(props.movie.id)) {
         setIsSaved(true);
       }
-    }
   }
 
   React.useEffect(() => {

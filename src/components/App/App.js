@@ -17,7 +17,7 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
-
+import constans from '../../utils/constans.js'
 
 function App() {
   const history = useHistory();
@@ -37,12 +37,12 @@ function App() {
   const [errorMessage, setErrorMessage] = React.useState('');
   const [isInfoTooltipOpen, setInfoTooltipOpen] = React.useState(false);
 
-  function handleNavigationOpenClick() { 
-    setNavigationOpen(true) 
+  function handleNavigationOpenClick() {
+    setNavigationOpen(true)
   };
 
-  function handleNavigationCloseClick() { 
-    setNavigationOpen(false) 
+  function handleNavigationCloseClick() {
+    setNavigationOpen(false)
   };
 
   function closeAllPopups() {
@@ -50,28 +50,40 @@ function App() {
   }
 
   function handleShortMovies(e) {
-    setCheckboxShortMovies(e.target.checked);
-    console.log(checkboxShortMovies)
-    let savedMovies = JSON.parse(localStorage.getItem("SavedMovies"));
-      if (savedMovies.length !== 0) {
-        const filteredSavedMovies = filterShortMovie(savedMovies)
-        localStorage.setItem('SearchedSavedMovies', JSON.stringify(filteredSavedMovies));
-        const searchedSavedMovies = JSON.parse(localStorage.getItem('SearchedSavedMovies'));
-        setSavedMovie(searchedSavedMovies);
-        setIsLoading(false);
+    setCheckboxShortMovies(e.target.checked)
+  }
+
+  React.useEffect(() => {
+    if (checkboxShortMovies) {
+      let movies = JSON.parse(localStorage.getItem("SearchedMovies"));
+      if (movies.length !== 0) {
+        const filteredMovies = filterShortMovie(movies)
+        setMovies(filteredMovies);
       } else {
         setNotFound(true);
-        setSavedMovie([]);  
+        setMovies([]);
         setIsLoading(false);
       }
-  }
+    } else {
+      let movies = JSON.parse(localStorage.getItem('SearchedMovies'));
+      if (movies.length !== 0) {
+        setMovies(movies)
+      } else {
+        setNotFound(true);
+        setMovies([]);
+        setIsLoading(false);
+      }
+    }
+  }, [checkboxShortMovies]);
+
 
   function handleRegister(name, email, password) {
     api.register(name, email, password).then((res) => {
       if (res) {
         setIsSucceed(true)
         setInfoTooltipOpen(true);
-        history.push('/signin');
+        handleLogin(email, password);
+
       } else {
         console.log("Ошибка при регистрации")
       }
@@ -95,7 +107,8 @@ function App() {
     api.login(email, password).then((res) => {
       if (res) {
         localStorage.setItem('jwt', res.token);
-        tokenCheck()
+        tokenCheck();
+        history.push('/movies');
       } else {
         console.log("Ошибка при авторизации")
       }
@@ -124,12 +137,13 @@ function App() {
           if (res) {
             setCurrentUser(res);
             setLoggedIn(true);
-            history.push('/movies');
+
           }
         })
         .catch((err) => console.log(err))
     }
   }
+
 
   function handleLogout() {
     setLoggedIn(false);
@@ -144,14 +158,14 @@ function App() {
   function filterShortMovie(movies) {
     if (checkboxShortMovies === true) {
       const filteredMovies = movies.filter((item) => {
-        return item.duration < 40
+        return item.duration < constans.SHORT_MOVIE_DURATION
       });
       return filteredMovies
     } else {
       return movies
     }
   }
-  
+
 
   const handleShowMovies = (searchText) => {
     setNotFound(false);
@@ -191,7 +205,7 @@ function App() {
         }
       }
     } else {
-      let savedMovies = JSON.parse(localStorage.getItem("SavedMovies"));
+      let savedMovies = JSON.parse(localStorage.getItem("SavedMovies")); //заменить на апи сейв мувис
       const searchSavedMoviesResult = SearchMovies(savedMovies, searchText)
       if (searchSavedMoviesResult.length !== 0) {
         const filteredSavedMovies = filterShortMovie(searchSavedMoviesResult)
@@ -201,7 +215,7 @@ function App() {
         setIsLoading(false);
       } else {
         setNotFound(true);
-        setSavedMovie([]);  
+        setSavedMovie([]);
         setIsLoading(false);
       }
     }
@@ -228,6 +242,7 @@ function App() {
         });
         setSavedMovie(updateSavedMovies);
         localStorage.setItem('SavedMovies', JSON.stringify(updateSavedMovies));
+        localStorage.setItem('SearchedSavedMovies', JSON.stringify(updateSavedMovies));
 
       })
       .catch(err => console.log(err));
@@ -246,6 +261,8 @@ function App() {
       })
   }
 
+
+
   React.useEffect(() => {
     if (localStorage.getItem('Movies')) {
       setAllMovies(JSON.parse(localStorage.getItem('Movies')));
@@ -261,17 +278,43 @@ function App() {
     setError(false)
   }, [location])
 
+
+  function checkShortMovies(movies) {
+    const filteredMovies = movies.filter((item) => {
+      return item.duration < constans.SHORT_MOVIE_DURATION
+    });
+    if (filteredMovies.length === movies.length && filteredMovies.length !== 0) {
+      setCheckboxShortMovies(true)
+    } else { setCheckboxShortMovies(false) }
+  }
+
   React.useEffect(() => {
-    if (isLoggedIn) {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      const searchedMovies = JSON.parse(localStorage.getItem('SearchedMovies'));
+      if (searchedMovies) {
+        setMovies(searchedMovies);
+        checkShortMovies(searchedMovies)
+      } else {
+        setMovies(movies);
+      }
+    }
+  }, [location]);
+
+
+  React.useEffect(() => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt && savedMoviesRoute) {
       api.getSavedMovies()
         .then((res) => {
-          setSavedMovie(res);
-          console.log(savedMovie)
+          const userMovies = res.filter((movies) => movies.owner === currentUser._id);
+          localStorage.setItem('SavedMovies', JSON.stringify(userMovies));
+          setSavedMovie(userMovies);
+          checkShortMovies(userMovies)
         })
         .catch(err => console.log(err));
-
     }
-  }, [location])
+  }, [location]);
 
   return (
     < CurrentUserContext.Provider value={currentUser}>
@@ -279,16 +322,56 @@ function App() {
         <>
           <div className="page">
             <div className="page__container">
+
+              <Header
+                isLoggedIn={isLoggedIn}
+                onNavigationOpen={handleNavigationOpenClick} />
+              <Navigation
+                isLoggedIn={isLoggedIn}
+                isOpen={isNavigationOpen}
+                onNavigationClose={handleNavigationCloseClick} />
               <Switch>
-              <Route exact path="/">
-                  <Main
-                  />
+                <Route exact path="/" >
+                  <Main />
                 </Route>
+
+                <ProtectedRoute path="/movies"
+                  isLoggedIn={isLoggedIn}
+                  component={Movies}
+                  onShowMovies={handleShowMovies}
+                  onSavedMovie={handleSavedMovie}
+                  onDeleteMovie={handleDeleteMovie}
+                  isShortMovies={checkboxShortMovies}
+                  handleShortMovies={handleShortMovies}
+                  error={error}
+                  notFound={notFound}
+                  movies={movies}
+                  savedMovies={savedMovie}
+                  isLoading={isLoading}>
+                </ProtectedRoute>
+
+                <ProtectedRoute path="/saved-movies" isLoggedIn={isLoggedIn}
+                  component={SavedMovies}
+                  movies={savedMovie}
+                  onDeleteMovie={handleDeleteMovie}
+                  isSaved={true}
+                  onShowMovies={handleShowMovies}
+                  isShortMovies={checkboxShortMovies}
+                  handleShortMovies={handleShortMovies}
+                  error={error}
+                  notFound={notFound}
+                  isLoading={isLoading}>
+                </ProtectedRoute>
+
+                <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}
+                  component={Profile}
+                  onEditUserProfile={handleEditUserProfile}
+                  onLogout={handleLogout}>
+                </ProtectedRoute>
 
                 <Route path="/signin">
                   <Login
-                    onLogin={handleLogin}
-                  />
+                    onLogin={handleLogin} />
                 </Route>
 
                 <Route path="/signup">
@@ -296,57 +379,6 @@ function App() {
                     onRegister={handleRegister}
                   />
                 </Route>
-
-                <ProtectedRoute path="/movies" isLoggedIn={isLoggedIn}>
-                  <Header
-                    onNavigationOpen={handleNavigationOpenClick} />
-                  <Navigation
-                    isOpen={isNavigationOpen}
-                    onNavigationClose={handleNavigationCloseClick} />
-                  <Movies
-                    onShowMovies={handleShowMovies}
-                    onSavedMovie={handleSavedMovie}
-                    onDeleteMovie={handleDeleteMovie}
-                    isShortMovies={checkboxShortMovies}
-                    handleShortMovies={handleShortMovies}
-                    error={error}
-                    notFound={notFound}
-                    movies={movies}
-                    savedMovies={savedMovie}
-                    isLoading={isLoading}
-                  />
-                </ProtectedRoute>
-
-                <ProtectedRoute path="/saved-movies" isLoggedIn={isLoggedIn}>
-                  <Header
-                    onNavigationOpen={handleNavigationOpenClick} />
-                  <Navigation
-                    isOpen={isNavigationOpen}
-                    onNavigationClose={handleNavigationCloseClick} />
-                  <SavedMovies
-                    movies={savedMovie}
-                    onDeleteMovie={handleDeleteMovie}
-                    isSaved={true}
-                    onShowMovies={handleShowMovies}
-                    isShortMovies={checkboxShortMovies}
-                    handleShortMovies={handleShortMovies}
-                    error={error}
-                    notFound={notFound}
-                    isLoading={isLoading}
-                  />
-                </ProtectedRoute>
-
-                <ProtectedRoute path="/profile" isLoggedIn={isLoggedIn}>
-                  <Header
-                    onNavigationOpen={handleNavigationOpenClick} />
-                  <Navigation
-                    isOpen={isNavigationOpen}
-                    onNavigationClose={handleNavigationCloseClick} />
-                  <Profile
-                    onEditUserProfile={handleEditUserProfile}
-                    onLogout={handleLogout}
-                  />
-                </ProtectedRoute>
 
                 <Route path="*">
                   <NotFound />

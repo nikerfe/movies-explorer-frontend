@@ -3,9 +3,8 @@ const checkResponse = (res) => (res.ok ? res.json() : Promise.reject(`Error: ${r
 class MainApi {
 
 
-    constructor({ baseUrl, token }) {
-        this._baseUrl = baseUrl;
-        this._token = token;
+    constructor({ baseUrl}) {
+        this._baseUrl = baseUrl;   
     }
 
     register(name, email, password) {
@@ -124,7 +123,6 @@ class MainApi {
 
 const api = new MainApi({
     baseUrl: 'http://api.theworldofcinema.nomoredomains.monster',
-    token: `Bearer ${localStorage.getItem('jwt')}`
 });
 
 export default api;

@@ -2,33 +2,34 @@ import "./MoviesCardList.css";
 import MoviesCard from '../MoviesCard/MoviesCard';
 import Preloader from '../Preloader/Preloader.js';
 import React from 'react';
+import constans from '../../utils/constans.js'
 
 function MoviesCardList(props) {
 
   const [numberShowedMovies, setNumberShowedMovies] = React.useState(0);
   const [numberAddedMovies, setNumberAddedMovies] = React.useState(0);
-
+  
   function shownNumberOfMovies(pageWidth) {
-    if (pageWidth > 769) {
+    if (pageWidth > 934) {
       return {
-        numberShowedMovies: 12,
-        numberAddedMovies: 3
+        numberShowedMovies: constans.NUMBER_SHOWED_MOVIES_PAGEWIDTH_1280,
+        numberAddedMovies: constans.NUMBER_ADDEDD_MOVIES_PAGEWIDTH_1280
       }
-    } else if (pageWidth < 481) {
+    } else if (600 < pageWidth < 934) {
       return {
-        numberShowedMovies: 8,
-        numberAddedMovies: 2
+        numberShowedMovies: constans.NUMBER_SHOWED_MOVIES_PAGEWIDTH_768,
+        numberAddedMovies: constans.NUMBER_ADDEDD_MOVIES_PAGEWIDTH_768
       }
     } else {
       return {
-        numberShowedMovies: 5,
-        numberAddedMovies: 2
+        numberShowedMovies: constans.NUMBER_SHOWED_MOVIES_PAGEWIDTH_480,
+        numberAddedMovies: constans.NUMBER_ADDEDD_MOVIES_PAGEWIDTH_480
       }
     }
   };
 
   function setShownNumberOfMovies() {
-    const pageWidth = window.innerWidth;
+    const pageWidth = document.querySelector('.page').clientWidth;
     const shownCardsParameters = shownNumberOfMovies(pageWidth);
     setNumberShowedMovies(shownCardsParameters.numberShowedMovies);
     setNumberAddedMovies(shownCardsParameters.numberAddedMovies);
@@ -65,6 +66,7 @@ function MoviesCardList(props) {
           onSavedMovie={props.onSavedMovie}
           onDeleteMovie={props.onDeleteMovie}
           savedMovies={props.savedMovies}
+          isShortMovies={props.checkboxShortMovies}
         />))
         }
 
