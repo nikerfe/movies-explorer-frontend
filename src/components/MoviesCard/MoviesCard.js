@@ -1,11 +1,15 @@
 import React from 'react';
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
+import { SaveMoviesContext } from '../../contexts/SaveMoviesContext';
 
 function MoviesCard(props) {
   const location = useLocation().pathname;
   const savedMoviesRoute = (location === "/saved-movies") ? true : false;
-  const [isSaved, setIsSaved] = React.useState(false);
+
+  const savedMovies = React.useContext(SaveMoviesContext);
+
+  const isLiked = savedMovies.some((savedMovie) => (props.movieId || props.movie.id) === savedMovie.movieId);
 
   const movie = {
     country: props.movie.country || 'Страна не указана',
@@ -36,23 +40,8 @@ function MoviesCard(props) {
     }
   }
 
-  function checkSavedMovie() {
-      let savedMovies = savedMoviesLocal()
-      if (savedMovies.map(item => item.movieId).includes(props.movie.id)) {
-        setIsSaved(true);
-      }
-  }
-
-  React.useEffect(() => {
-    checkSavedMovie();
-    console.log('я сработал')
-  }, []);
-
-
   function handleClickSave() {
-
     props.onSavedMovie(movie)
-    setIsSaved(true);
   }
 
   function handleClickDeleteFromSavedMovies() {
@@ -64,7 +53,6 @@ function MoviesCard(props) {
     console.log(savedMovies)
     const movie = savedMovies.find(movie => movie.nameRU === props.movie.nameRU);
     props.onDeleteMovie(movie._id);
-    setIsSaved(false)
   }
 
 
@@ -79,8 +67,8 @@ function MoviesCard(props) {
         {props.isSaved ?
           (<button onClick={handleClickDeleteFromSavedMovies}
             className="movie__bookmark movie__bookmark_type_delete"></button>)
-          : (<button onClick={isSaved ? handleClickDeleteFromMovies : handleClickSave}
-            className={isSaved ? "movie__bookmark movie__bookmark_type_save-active" : "movie__bookmark movie__bookmark_type_save"}></button>)
+          : (<button onClick={isLiked ? handleClickDeleteFromMovies : handleClickSave}
+            className={isLiked ? "movie__bookmark movie__bookmark_type_save-active" : "movie__bookmark movie__bookmark_type_save"}></button>)
 
         }
 
