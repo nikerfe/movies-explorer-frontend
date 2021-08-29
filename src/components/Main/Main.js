@@ -8,7 +8,6 @@ import Promo from '../Promo/Promo';
 function Main() {
     return (
         <>
-            <Header />
             <Promo />
             <AboutProject />
             <Techs />

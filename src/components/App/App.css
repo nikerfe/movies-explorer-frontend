@@ -11,6 +11,8 @@
 }
 
 .page__container {
+  display: flex;
+  flex-direction: column;
   max-width: 1280px;
   min-width: 320px;
   min-height: 100vh;
@@ -24,5 +26,6 @@
   -ms-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
+  position: relative;
 }
 

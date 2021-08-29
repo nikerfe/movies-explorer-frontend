@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     transition: visibility 0s, opacity 0.5s linear;
+    margin-bottom: 40px;
 }
 
 .auth__container {
@@ -60,6 +61,8 @@
     border-bottom: 2px solid rgba(204, 204, 204, .5);
   }
 
+
+
 .auth__submit-button {
     width: 100%;
     background-color: rgba(255, 104, 56, 1);
@@ -74,6 +77,11 @@
     border:none;
     border-radius: 3px;
 }
+
+.auth__submit-button_disabled {
+    background-color: rgba(169, 169, 169, 1);
+}
+
 
 .auth__submit-button_type_signup {
     margin: 69px 0 0 0;

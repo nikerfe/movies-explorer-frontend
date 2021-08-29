@@ -1,10 +1,8 @@
 import React from 'react';
 import './Techs.css';
-import { Route, NavLink } from 'react-router-dom';
 import NavTab from '../NavTab/NavTab';
-function Techs(props) {
-
-
+function Techs() {
+    
     return (
 
         <section className="techs">

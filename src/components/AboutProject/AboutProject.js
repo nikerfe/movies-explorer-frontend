@@ -1,15 +1,11 @@
 import React from 'react';
 import './AboutProject.css';
-import { Route, NavLink } from 'react-router-dom';
 import NavTab from '../NavTab/NavTab';
 function AboutProject(props) {
-
 
     return (
 
         <section className="about-project">
-            
-
             <div className="about-project__container">
             <NavTab
             name="О проекте"/>
@@ -32,15 +28,11 @@ function AboutProject(props) {
                     </div>
                     <div className="about-project__loading-frontend">
                         <div className="about-project__loading-container about-project__loading-container_type_frontend">
-                            <p className="about-project__loading-duration">5 недель</p>
+                            <p className="about-project__loading-duration">4 недели</p>
                         </div>
                         <p className="about-project__loading-title">Front-end</p>
                     </div>
-
                 </div>
-
-
-
 
             </div>
 

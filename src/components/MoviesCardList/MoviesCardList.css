@@ -7,7 +7,7 @@
 
 .movies__list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap:30px 24px;
     list-style: none;
     padding: 0;
@@ -23,6 +23,29 @@
     cursor: pointer;
     margin: 80px 0;
 }
+
+.hidden {
+    display: none;
+  }
+  
+  .movies__no-saved-films {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+  .movies__not-found {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+  }
+  
+  .movies__error {
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+  }
+  
 
 @media screen and (max-width: 1023px) {
     .movies {

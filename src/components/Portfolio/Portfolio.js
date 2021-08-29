@@ -1,7 +1,6 @@
 import React from 'react';
 import './Portfolio.css';
-import { Route, NavLink } from 'react-router-dom';
-function Portfolio(props) {
+function Portfolio() {
 
 
     return (

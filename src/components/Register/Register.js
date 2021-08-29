@@ -1,6 +1,5 @@
 import Auth from '../Auth/Auth.js';
 import './Register.css';
-import { NavLink } from 'react-router-dom';
 
 function Register(props) {
   function handleSubmit(name, password, email) {
@@ -11,6 +10,7 @@ function Register(props) {
     name="signup"
     buttonTitle="Зарегистрироваться"
     onSubmit={handleSubmit}
+    errorMessage={props.errorMessage}
   >
 
   </Auth>)

@@ -30,10 +30,9 @@
    justify-content: space-between;
 }
 
-.profile__input-container:first-child {
-     border-bottom: 1px solid #E8E8E8;
-     padding-bottom: 16px;
-     margin-bottom: 16px;
+ .profile__divider {
+    border-bottom: 1px solid #E8E8E8;
+    margin-bottom: 21px;
  }
 
 .profile__input {
@@ -50,12 +49,28 @@
     margin: 220px 0 16px 0;
 }
 
+.profile__button:hover {
+    cursor: pointer;
+    opacity: .8;
+}
+
+.profile__button_disabled {
+    color: rgba(169, 169, 169, 1);
+}
+
 .profile__logout {
     color: #EE3465;
     font-size: 13px;
     line-height: 16px;
     text-decoration: none;
     margin-bottom: 70px;
+}
+
+.profile__input-error {
+    color: red;
+    font-size: 10px;
+    margin-top: 5px;
+    height: 21px;
 }
 
 @media screen and (max-width: 678px) {

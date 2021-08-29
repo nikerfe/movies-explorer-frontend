@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     background: #FDFDFD;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
     border: none;
@@ -48,6 +49,7 @@
     outline: none;
     border: none;
     background-position: center;
+    cursor: pointer;
 }
 
 .movie__bookmark_type_save {
@@ -68,4 +70,25 @@
     width: 100%;
     object-fit: cover;
     object-position: center;
+    height: 203px;
+    background-size: cover;
+    background-position: center;
+}
+
+@media screen and (max-width: 768px) {
+    .movie__image {
+        height: 190px;
+    }
+}
+
+@media screen and (max-width: 497px) {
+    .movie__image {
+        height: 250px;
+    }
+}
+
+@media screen and (max-width: 380px) {
+    .movie__image {
+        height: 168px;
+    }
 }
