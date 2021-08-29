@@ -17,7 +17,8 @@ import Movies from '../Movies/Movies';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
-import constans from '../../utils/constans.js'
+import constans from '../../utils/constans.js';
+import { SaveMoviesContext } from '../../contexts/SaveMoviesContext.js';
 
 function App() {
   const history = useHistory();
@@ -146,7 +147,7 @@ function App() {
     setNotFound(false);
     setError(false);
     setIsLoading(true);
-    if (!savedMoviesRoute && searchText !== null) {
+    if (!savedMoviesRoute) {
       if (allMovies.length === 0) {
         moviesApi.getMovies()
           .then((movies) => {
@@ -315,6 +316,7 @@ function App() {
   
 
   return (
+    <SaveMoviesContext.Provider value={savedMovie}>
     < CurrentUserContext.Provider value={currentUser}>
       <div className="App">
         <>
@@ -395,6 +397,7 @@ function App() {
         </>
       </div>
     </CurrentUserContext.Provider>
+    </SaveMoviesContext.Provider>
   );
 }
 
