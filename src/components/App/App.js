@@ -53,30 +53,6 @@ function App() {
     setCheckboxShortMovies(e.target.checked)
   }
 
-  React.useEffect(() => {
-    if (checkboxShortMovies) {
-      let movies = JSON.parse(localStorage.getItem("SearchedMovies"));
-      if (movies.length !== 0) {
-        const filteredMovies = filterShortMovie(movies)
-        setMovies(filteredMovies);
-      } else {
-        setNotFound(true);
-        setMovies([]);
-        setIsLoading(false);
-      }
-    } else {
-      let movies = JSON.parse(localStorage.getItem('SearchedMovies'));
-      if (movies.length !== 0) {
-        setMovies(movies)
-      } else {
-        setNotFound(true);
-        setMovies([]);
-        setIsLoading(false);
-      }
-    }
-  }, [checkboxShortMovies]);
-
-
   function handleRegister(name, email, password) {
     api.register(name, email, password).then((res) => {
       if (res) {
@@ -165,7 +141,6 @@ function App() {
       return movies
     }
   }
-
 
   const handleShowMovies = (searchText) => {
     setNotFound(false);
@@ -261,8 +236,6 @@ function App() {
       })
   }
 
-
-
   React.useEffect(() => {
     if (localStorage.getItem('Movies')) {
       setAllMovies(JSON.parse(localStorage.getItem('Movies')));
@@ -315,6 +288,29 @@ function App() {
         .catch(err => console.log(err));
     }
   }, [location]);
+
+  React.useEffect(() => {
+    if (checkboxShortMovies) {
+      let movies = JSON.parse(localStorage.getItem("SearchedMovies"));
+      if (movies.length !== 0) {
+        const filteredMovies = filterShortMovie(movies)
+        setMovies(filteredMovies);
+      } else {
+        setNotFound(true);
+        setMovies([]);
+        setIsLoading(false);
+      }
+    } else {
+      let movies = JSON.parse(localStorage.getItem('SearchedMovies'));
+      if (movies.length !== 0) {
+        setMovies(movies)
+      } else {
+        setNotFound(true);
+        setMovies([]);
+        setIsLoading(false);
+      }
+    }
+  }, [checkboxShortMovies]);
 
   return (
     < CurrentUserContext.Provider value={currentUser}>
