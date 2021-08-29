@@ -66,7 +66,7 @@ function MoviesCardList(props) {
           onSavedMovie={props.onSavedMovie}
           onDeleteMovie={props.onDeleteMovie}
           savedMovies={props.savedMovies}
-          isShortMovies={props.checkboxShortMovies}
+          isShortMovies={props.isShortMovies}
         />))
         }
 

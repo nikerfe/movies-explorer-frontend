@@ -45,7 +45,9 @@ function MoviesCard(props) {
 
   React.useEffect(() => {
     checkSavedMovie();
+    console.log('я сработал')
   }, []);
+
 
   function handleClickSave() {
 

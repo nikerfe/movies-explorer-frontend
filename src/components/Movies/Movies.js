@@ -24,7 +24,7 @@ function Movies(props) {
             error={props.error}
             notFound={props.notFound}
             isLoading={props.isLoading}
-            isShortMovies={props.checkboxShortMovies}
+            isShortMovies={props.isShortMovies}
             />
         </>
     );

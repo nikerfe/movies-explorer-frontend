@@ -146,7 +146,7 @@ function App() {
     setNotFound(false);
     setError(false);
     setIsLoading(true);
-    if (!savedMoviesRoute) {
+    if (!savedMoviesRoute && searchText !== null) {
       if (allMovies.length === 0) {
         moviesApi.getMovies()
           .then((movies) => {
@@ -180,7 +180,7 @@ function App() {
         }
       }
     } else {
-      let savedMovies = JSON.parse(localStorage.getItem("SavedMovies")); //заменить на апи сейв мувис
+      let savedMovies = JSON.parse(localStorage.getItem("SavedMovies")); 
       const searchSavedMoviesResult = SearchMovies(savedMovies, searchText)
       if (searchSavedMoviesResult.length !== 0) {
         const filteredSavedMovies = filterShortMovie(searchSavedMoviesResult)
@@ -292,7 +292,7 @@ function App() {
   React.useEffect(() => {
     if (checkboxShortMovies) {
       let movies = JSON.parse(localStorage.getItem("SearchedMovies"));
-      if (movies.length !== 0) {
+      if (movies) {
         const filteredMovies = filterShortMovie(movies)
         setMovies(filteredMovies);
       } else {
@@ -302,7 +302,7 @@ function App() {
       }
     } else {
       let movies = JSON.parse(localStorage.getItem('SearchedMovies'));
-      if (movies.length !== 0) {
+      if (movies) {
         setMovies(movies)
       } else {
         setNotFound(true);
@@ -311,6 +311,8 @@ function App() {
       }
     }
   }, [checkboxShortMovies]);
+
+  
 
   return (
     < CurrentUserContext.Provider value={currentUser}>
